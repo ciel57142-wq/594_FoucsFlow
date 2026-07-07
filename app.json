@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "name": "FocusFlow",
+    "slug": "focusflow",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "backgroundColor": "#1E1B2E"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "android": {
+      "package": "com.focusflow.app",
+      "minSdkVersion": 24,
+      "permissions": ["SCHEDULE_EXACT_ALARM", "POST_NOTIFICATIONS"]
+    },
+    "plugins": ["expo-sqlite", "expo-notifications"]
+  }
+}
