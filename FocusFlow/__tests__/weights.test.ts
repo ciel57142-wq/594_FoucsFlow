@@ -5,7 +5,7 @@ import { SIGNAL_KEYS } from '../src/domain/signals';
 
 const NOW = new Date(2026, 4, 26, 9, 0, 0).getTime();
 
-describe('weight tuning', () => {
+describe('FR-5.1/FR-5.2/FR-6.1 weight tuning', () => {
   it('keeps the defaults until there is a real sample', () => {
     const { attempts } = generateHistory(STUDENT_PERSONA, 2, NOW);
     const tuned = tuneWeights(attempts.slice(0, 6), emptyProfile(NOW));

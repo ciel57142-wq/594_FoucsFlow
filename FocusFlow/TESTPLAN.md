@@ -15,7 +15,7 @@ device.
 
 ## Version 1 gate
 
-### S1 — Task lifecycle (CRUD)
+### S1 — Task lifecycle (CRUD) [FR-1, FR-1.1, FR-1.2, FR-2.1, FR-2.2, FR-4]
 1. Create a task with title only → appears in the backlog with a 30-minute default estimate.
 2. Edit every field: notes, project, two tags, priority, estimate, due date, planned day.
 3. Complete it → moves to Done, records `actual_min` and `completed_at`.
@@ -24,30 +24,30 @@ device.
 
 **Pass:** all five states persist across an app restart.
 
-### S2 — Projects and tags
+### S2 — Projects and tags [FR-2.2]
 Assign a project and two tags; filter the backlog by each; delete a project and confirm its
 tasks survive with no project.
 
-### S3 — Today view interactions
+### S3 — Today view interactions [FR-3.1, FR-3.2, FR-4]
 With five tasks planned: complete one, snooze one to tomorrow (deferral count increments by
 one), reschedule one three days out, send one back to the backlog, quick-add one.
 
 **Pass:** the committed-minutes total and task count update immediately after each action.
 
-### S4 — Notifications on a physical device
+### S4 — Notifications on a physical device [FR-6.1, FR-6.2]
 Set a task due 40 minutes out with a 30-minute offset. Background the app.
 
 **Pass:** the notification fires within a minute of the ten-minute mark; opening it writes a
 `notification_engaged` event. Repeat with a reminder that would land inside quiet hours and
 confirm it moves to the morning instead.
 
-### S5 — Statistics against the seeded dataset
+### S5 — Statistics against the seeded dataset [FR-5.1, FR-5.2]
 Load the demo dataset. Compare the Statistics screen against the fixture's known values:
 completion rate, estimate ratio, busiest hours.
 
 **Pass:** displayed values match the fixture within rounding.
 
-### S5b — Offline behaviour
+### S5b — Offline behaviour [NFR-1]
 Enable airplane mode and repeat S1 and S3.
 
 **Pass:** no error states, no spinners, identical behaviour. The app makes no network calls.

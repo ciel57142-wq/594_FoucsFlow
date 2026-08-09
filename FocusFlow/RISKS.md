@@ -33,7 +33,7 @@ migration against live user data.
 - Mitigation: migration 1 writes `tasks.actual_min`, `tasks.completed_at`,
   `tasks.deferral_count`, the `events` log, and the `day_plans` snapshot table — all five
   inputs the Version 2 model consumes — even though Version 1 only displays them
-  descriptively.
+  descriptively. [NFR-1]
 - Verification: `db/schema.ts` migration 2 adds one cache table and no columns. Version 2
   shipped without a data migration, which is what closes this risk.
 
@@ -42,11 +42,11 @@ migration against live user data.
 Recommendations are poor for new users and a few good days can look like a pattern.
 
 - Mitigation: `COLD_START_MIN_COMPLETIONS = 12` in `domain/profile.ts`. Below it the profile
-  reports `coldStart`, hour weights stay flat at 0.5, and estimates are not corrected.
+  reports `coldStart`, hour weights stay flat at 0.5, and estimates are not corrected. [FR-5.2]
 - Mitigation: `MODEL_MIN_SAMPLES = 20` in `domain/logistic.ts`. Below it predictions are
-  blended toward the base rate in proportion to how much data exists.
+  blended toward the base rate in proportion to how much data exists. [FR-5.1]
 - Mitigation: weight tuning in `domain/weights.ts` shrinks correlations by `n / (n + 20)`,
-  caps any single weight at 0.45 and floors it at 0.05, so no signal can take over.
+  caps any single weight at 0.45 and floors it at 0.05, so no signal can take over. [FR-6.1]
 - Mitigation: per-tag estimate ratios shrink toward the global ratio by `n / (n + 5)`.
 - Mitigation: L2 regularisation (`l2 = 0.02`) on the logistic fit.
 - Tests: `__tests__/logistic.test.ts` asserts the base-rate fallback on a four-day history;
@@ -58,8 +58,8 @@ Recommendations are poor for new users and a few good days can look like a patte
 An explanation feature that is written separately from the scoring will eventually lie.
 
 - Mitigation: the score in `domain/recommender.ts` is the sum of the same `Contribution`
-  objects the panel renders — there is no second code path to drift.
-- Test: `__tests__/recommender.test.ts` asserts the contributions sum to the score exactly.
+  objects the panel renders — there is no second code path to drift. [FR-5.2]
+- Test: `__tests__/recommender.test.ts` asserts the contributions sum to the score exactly. [FR-5.2]
 
 ## R6 — Notification fatigue from adaptive timing (Version 2 specific) — *Open*
 
@@ -67,5 +67,5 @@ Moving reminders toward high-engagement hours could cluster several reminders in
 window.
 
 - Current state: each task is scheduled independently; quiet hours and a minimum runway
-  before the deadline are enforced, but there is no per-day cap.
+  before the deadline are enforced, but there is no per-day cap. [FR-6.1]
 - Planned: a spacing rule in `domain/reminders.ts` and a daily maximum in Settings.

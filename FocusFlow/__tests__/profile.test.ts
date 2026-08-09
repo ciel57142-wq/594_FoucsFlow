@@ -5,7 +5,7 @@ import { dateKeyToTs, dateKey } from '../src/domain/time';
 
 const NOW = new Date(2026, 4, 26, 12, 0, 0).getTime();
 
-describe('history profile', () => {
+describe('FR-5.2/NFR-1 history profile', () => {
   it('starts in cold start with no data', () => {
     const p = buildProfile([], [], NOW);
     expect(p.coldStart).toBe(true);

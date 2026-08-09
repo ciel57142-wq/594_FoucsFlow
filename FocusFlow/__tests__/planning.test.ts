@@ -8,7 +8,7 @@ import { makeTask } from './factories';
 
 const NOW = new Date(2026, 4, 26, 9, 0, 0).getTime();
 
-describe('overcommitment warning', () => {
+describe('FR-3.1/FR-3.2/FR-5.1 overcommitment warning', () => {
   it('calls a light day light', () => {
     const tasks = [makeTask({ estimateMin: 30 }), makeTask({ estimateMin: 25 })];
     const day = assessDay(tasks, emptyProfile(NOW), 240, null);

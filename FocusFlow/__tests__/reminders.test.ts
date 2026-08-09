@@ -9,7 +9,7 @@ const NOW = new Date(2026, 4, 26, 9, 0, 0).getTime();
 const v1: Settings = { ...DEFAULT_SETTINGS, appVersion: 1, defaultReminderOffsetMin: 30 };
 const v2: Settings = { ...DEFAULT_SETTINGS, appVersion: 2 };
 
-describe('quiet hours', () => {
+describe('FR-6.1/FR-6.2 quiet hours', () => {
   it('handles a window that wraps past midnight', () => {
     expect(isQuietHour(23, v1)).toBe(true);
     expect(isQuietHour(3, v1)).toBe(true);
