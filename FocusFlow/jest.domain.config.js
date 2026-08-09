@@ -13,4 +13,10 @@ module.exports = {
   transform: {
     '^.+\\.ts$': ['ts-jest', { tsconfig: { strict: true, esModuleInterop: true, target: 'ES2020', lib: ['ES2020'] } }],
   },
+  coverageThreshold: {
+    './src/domain/': {
+      statements: 80,
+      branches: 80,
+    },
+  },
 };

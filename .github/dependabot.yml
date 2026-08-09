@@ -1,0 +1,13 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /FocusFlow
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    assignees: []
+    reviewers: []
+    labels:
+      - dependencies
+    allow:
+      - dependency-type: all
