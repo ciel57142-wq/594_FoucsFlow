@@ -5,6 +5,7 @@ const reactHooksPlugin = require('eslint-plugin-react-hooks');
 
 module.exports = [
   configs.recommended,
+  typescriptPlugin.configs.recommended,
   {
     ignores: ['**/eslint.config.js', '**/babel.config.js', '**/*.config.js'],
   },
@@ -33,7 +34,6 @@ module.exports = [
       '@typescript-eslint': typescriptPlugin,
       'react-hooks': reactHooksPlugin,
     },
-    extends: ['plugin:@typescript-eslint/recommended'],
     rules: {
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
