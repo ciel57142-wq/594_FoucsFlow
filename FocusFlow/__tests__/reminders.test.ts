@@ -45,6 +45,11 @@ describe('version 1 reminders', () => {
     const plan = fixedReminder(makeTask({ dueAt, reminderOffsetMin: 330 }), v1, NOW)!;
     expect(new Date(plan.fireAt).getHours()).toBe(v1.quietEndHour);
   });
+
+  it('returns null when a fixed reminder would land after the due date', () => {
+    const dueAt = new Date(2026, 4, 27, 6, 30, 0).getTime();
+    expect(fixedReminder(makeTask({ dueAt, reminderOffsetMin: 480 }), v1, NOW)).toBeNull();
+  });
 });
 
 describe('version 2 adaptive reminders', () => {
@@ -96,6 +101,16 @@ describe('version 2 adaptive reminders', () => {
     const plan = adaptiveReminder(task, v2, emptyProfile(NOW), NOW)!;
     expect(plan.adaptive).toBe(false);
     expect(plan.reason).toMatch(/learning/);
+  });
+
+  it('falls back when adaptive scheduling cannot find any non-quiet candidate time', () => {
+    const { completions, attempts } = generateHistory(STUDENT_PERSONA, 60, NOW);
+    const profile = buildProfile(completions, attempts, NOW);
+    const quietAllDay: Settings = { ...v2, quietStartHour: 0, quietEndHour: 24 };
+    const task = makeTask({ tags: ['school'], dueAt: NOW + 2 * DAY });
+    const plan = adaptiveReminder(task, quietAllDay, profile, NOW);
+    expect(plan).not.toBeNull();
+    expect(plan?.adaptive).toBe(false);
   });
 });
 

@@ -1,5 +1,6 @@
 import { computeSignals, signalDetail, attemptSignals, taskToSignalInput } from '../src/domain/signals';
 import { buildProfile, emptyProfile } from '../src/domain/profile';
+import { generateHistory, STUDENT_PERSONA } from '../src/domain/synthetic';
 import { dateKeyToTs } from '../src/domain/time';
 
 const NOW = new Date(2026, 4, 26, 12, 0, 0).getTime();
@@ -54,6 +55,18 @@ describe('signals module', () => {
     expect(signalDetail('due', overdueInput, ctx, 1)).toMatch(/Overdue/);
     const upcomingInput = { ...baseInput, dueAt: NOW + 3 * 3600_000 };
     expect(signalDetail('due', upcomingInput, ctx, 0)).toMatch(/Due in 3h/);
+  });
+
+  it('formats priority, deferral and effort details correctly outside cold start', () => {
+    const { completions, attempts } = generateHistory(STUDENT_PERSONA, 60, NOW);
+    const profile = buildProfile(completions, attempts, NOW);
+    const richInput = { ...baseInput, tags: ['school'], priority: 3, deferralCount: 1 };
+
+    expect(signalDetail('timeOfDay', richInput, { ...ctx, profile }, 0.8)).toMatch(/12:00 is (one of your strongest hours|a normal hour) for school/);
+    expect(signalDetail('priority', richInput, ctx, 1)).toBe('High priority');
+    expect(signalDetail('deferral', richInput, ctx, 1)).toBe('Pushed 1 time');
+    expect(signalDetail('effort', richInput, { ...ctx, remainingMin: 120, profile }, 1)).toMatch(/fits the 120m left/);
+    expect(signalDetail('effort', richInput, { ...ctx, remainingMin: 10, profile }, 0.1)).toMatch(/needed but only 10m left/);
   });
 
   it('produces attempt signals from a past evaluation timestamp', () => {
