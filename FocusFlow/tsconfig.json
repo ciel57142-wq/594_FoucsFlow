@@ -4,7 +4,10 @@
     "strict": true,
     "noUncheckedIndexedAccess": false,
     "baseUrl": ".",
-    "paths": { "@/*": ["src/*"] }
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "ignoreDeprecations": "5.0"
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
