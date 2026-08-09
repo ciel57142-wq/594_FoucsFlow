@@ -1,11 +1,11 @@
 # Configuration Management Report
 ## FocusFlow — CISC 594
 
-**Report version:** 1.0
+**Report version:** 1.1
 **Report date:** 9 August 2026
 **Repository:** `ciel57142-wq/594_FoucsFlow`
-**Branch inspected:** `master` (default branch)
-**Commit inspected:** `d7e04c4`
+**Branch inspected:** `cm/phase-1-build-integrity`
+**Commit inspected:** `f378e60`
 **Maintained by:** Senior Software Configuration Manager (course role)
 
 ---
@@ -57,21 +57,21 @@ The engineering substance is genuine and was verified, not assumed:
 - A database schema under explicit `PRAGMA user_version` migration control.
 - A system test plan that states pass criteria as numbers (calibration error below 0.10) rather than as opinions.
 
-The configuration management around that substance does not currently function. Four findings are severe:
+The configuration management around that substance remains incomplete, but the active branch has corrected several important infrastructure gaps. Four findings are still severe:
 
 **1. The default branch has no shared ancestry with any other branch.** Commit `acfa9b1` on `master` is an orphan root — 61 files, 5,777 insertions, no parent. `git merge-base master main` returns empty. The V1 codebase on `main` and the V2 codebase on `master` are two unrelated histories in one repository, and the development between them was never committed.
 
-**2. The CI workflow is invisible to GitHub.** `ci.yml` is located at `FocusFlow/.github/workflows/ci.yml`. **GitHub only reads workflow definitions from `.github/workflows/` at the repository root, which does not exist here.** The workflow additionally triggers on `main` while the code lives on `master`. It has never run and, in its current location, cannot run.
+**2. The root CI workflow placement is now correct.** `.github/workflows/ci.yml` exists at the repository root on the active branch, and `.github/pull_request_template.md` is also present at the root. The workflow is still unproven by historical GitHub runs, and the active code remains on `master` while `main` continues to hold unrelated legacy history.
 
-**3. Both declared quality gates fail on the current commit.** `npm ci` cannot run — no lockfile is tracked. `npm run typecheck` was executed during this review and produced **5 errors**. `npm run lint` fails with `eslint: not found` — the script has been declared since the V2 commit and the tool was never installed.
+**3. The declared quality gates are partially operational.** `npm ci` now succeeds in `FocusFlow/` on this branch. `npm run lint` passes. `npx jest -c jest.domain.config.js --ci` passes. `npm run typecheck` is still blocked by `FocusFlow/tsconfig.json` due to an invalid `ignoreDeprecations` setting.
 
 **4. No baseline exists.** Zero Git tags. `README.md` states each version ends at a tag (`v1.0.0`, `v2.0.0`) and `RISKS.md` closes risk R3 "at the v1.0.0 freeze." **Neither tag has ever existed.** No commit is identifiable as any released version.
 
-The pattern is consistent across every dimension: **process is described accurately and in detail, then not performed.** `README.md` describes trunk-based development with `v<version>/<feature>` branches merged by pull request. The repository contains 9 commits across two unrelated lineages, zero merge commits, zero branches matching that pattern, and six commits created through the GitHub web upload interface.
+The pattern is consistent across every dimension: **process is described accurately and in detail, then not performed.** `README.md` describes trunk-based development with `v<version>/<feature>` branches merged by pull request. The repository contains unrelated histories on `master` and `main`, zero merge commits, no tags, and several commits created through the GitHub web upload interface.
 
 **Current maturity: 44 / 100 — Level 2, "Documented, Not Enforced."**
 
-The remediation path is short because the difficult work is already done. What is missing is mechanical: a lockfile, a tag, a relocated workflow file, five type fixes, and a decision about which branch is the trunk. See §17.
+The remediation path is short because the difficult work is already done. What is missing is mechanical: a tag, a typecheck configuration fix, a merged repair branch, and a stable release baseline. See §17.
 
 ---
 
