@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import type { CompositeNavigationProp } from '@react-navigation/native';
+import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import type { RootStackParamList } from '../navigation';
 import { useApp } from '../state/AppContext';
 import { useToday } from '../state/useToday';
 import { CapacityMeter } from '../components/CapacityMeter';
@@ -9,10 +13,23 @@ import { WhyPanel } from '../components/WhyPanel';
 import { QuickAdd } from '../components/QuickAdd';
 import { Button, Card, Chip, EmptyState, SectionLabel } from '../components/primitives';
 import { Ranked, headlineReason } from '../domain/recommender';
+
+type FocusFlowTabParamList = {
+  Today: undefined;
+  Tasks: undefined;
+  Stats: undefined;
+  Settings: undefined;
+};
+
+type TodayScreenNavigationProp = CompositeNavigationProp<
+  BottomTabNavigationProp<FocusFlowTabParamList, 'Today'>,
+  NativeStackNavigationProp<RootStackParamList>
+>;
+
 import { addDaysToKey, formatDayHeading, formatMinutes } from '../domain/time';
 import { colors, space, type } from '../theme';
 
-export function TodayScreen({ navigation }: { navigation: any }) {
+export function TodayScreen({ navigation }: { navigation: TodayScreenNavigationProp }) {
   const { today, now, settings, createTask, completeTask, reopenTask, snoozeTask, scheduleTask } = useApp();
   const { ordered, rankings, done, assessment, nextUp, predictive } = useToday();
   const [why, setWhy] = useState<Ranked | null>(null);

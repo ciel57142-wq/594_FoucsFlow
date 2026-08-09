@@ -1,17 +1,34 @@
 import React, { useMemo, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import type { CompositeNavigationProp } from '@react-navigation/native';
+import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import type { RootStackParamList } from '../navigation';
 import { useApp } from '../state/AppContext';
 import { TaskRow } from '../components/TaskRow';
 import { Button, EmptyState, SectionLabel } from '../components/primitives';
 import { Task } from '../domain/types';
 import { addDaysToKey } from '../domain/time';
+
+type FocusFlowTabParamList = {
+  Today: undefined;
+  Tasks: undefined;
+  Stats: undefined;
+  Settings: undefined;
+};
+
+type TasksScreenNavigationProp = CompositeNavigationProp<
+  BottomTabNavigationProp<FocusFlowTabParamList, 'Tasks'>,
+  NativeStackNavigationProp<RootStackParamList>
+>;
+
 import { colors, radius, space, type } from '../theme';
 
 type Filter = { kind: 'all' } | { kind: 'project'; id: string } | { kind: 'tag'; name: string };
 
 /** The backlog: everything not on today's plan, grouped by when it is due. */
-export function TasksScreen({ navigation }: { navigation: any }) {
+export function TasksScreen({ navigation }: { navigation: TasksScreenNavigationProp }) {
   const { tasks, projects, tags, today, now, completeTask, reopenTask, scheduleTask } = useApp();
   const [filter, setFilter] = useState<Filter>({ kind: 'all' });
   const [showDone, setShowDone] = useState(false);
