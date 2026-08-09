@@ -1,5 +1,7 @@
 # FocusFlow
 
+[![CI](https://github.com/ciel57142-wq/594_FoucsFlow/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/ciel57142-wq/594_FoucsFlow/actions/workflows/ci.yml?query=branch%3Amaster)
+
 A mobile task manager with predictive scheduling. Single user, offline, Android-first.
 React Native (Expo) with a local SQLite database.
 
@@ -98,4 +100,4 @@ dashed second bar in Version 2 showing the same plan at the pace you actually wo
 - Releases are annotated tags `vMAJOR.MINOR.PATCH` cut from `master` only.
 - `main` holds the Version 1 lineage and is retained read-only.
 
-See `../docs/BRANCHING.md`, `../CHANGELOG.md`, `../RISKS.md`, and `../TESTPLAN.md`.
+See `../docs/BRANCHING.md`, `../docs/RELEASING.md`, `../docs/TRACEABILITY.md`, `./CHANGELOG.md`, `./RISKS.md`, and `./TESTPLAN.md`.

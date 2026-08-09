@@ -175,10 +175,10 @@ No CI register existed in the repository prior to this report. The following reg
 | CI-01 | Application source (4,543 LOC) | `FocusFlow/src/**` | Git | IMPLEMENTED |
 | CI-02 | Test source (562 LOC) | `FocusFlow/__tests__/**` | Git | IMPLEMENTED |
 | CI-03 | **Database schema** | `src/db/schema.ts` | `MIGRATIONS[]` applied against `PRAGMA user_version`; `LATEST_VERSION` derived from the array | **IMPLEMENTED** |
-| CI-04 | Build configuration | `package.json`, `app.json`, `tsconfig.json`, `babel.config.js`, `jest.domain.config.js` | Git | IMPLEMENTED |
+| CI-04 | Build configuration | `package.json`, `app.config.js`, `tsconfig.json`, `babel.config.js`, `jest.domain.config.js` | Git | IMPLEMENTED |
 | CI-05 | **Dependency closure** | `package.json` only | **None — no lockfile tracked** | **NOT IMPLEMENTED** |
 | CI-06 | Product identity | `edu.cisc594.focusflow`; version `2.0.0` in **two** files | Manual synchronisation | PARTIALLY IMPLEMENTED |
-| CI-07 | Platform floor | `app.json`: `minSdkVersion 26`, 3 Android permissions | Git; cross-referenced by RISKS R2 | IMPLEMENTED |
+| CI-07 | Platform floor | `app.config.js`: `minSdkVersion 26`, 3 Android permissions | Git; cross-referenced by RISKS R2 | IMPLEMENTED |
 | CI-08 | **Model tuning constants** | See table below | Git; documented in RISKS R4 | **IMPLEMENTED** |
 | CI-09 | Process documentation | `README`, `CHANGELOG`, `RISKS`, `TESTPLAN` | Git (on `master` only) | IMPLEMENTED |
 | CI-10 | Requirements baseline | `docs/Product_Requirements_Document.md` | Git (**on `main` only**) | PARTIALLY IMPLEMENTED |

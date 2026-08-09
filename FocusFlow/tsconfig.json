@@ -7,6 +7,11 @@
     "paths": {
       "@/*": ["src/*"]
     },
+    // Suppress TypeScript deprecation diagnostics emitted at the 5.0 level
+    // by the Expo/React Native type chain while the current dependency set
+    // remains pinned. This comment documents the unrelated commit that added
+    // the flag and the fact that it should only be removed after a real
+    // verification run of `npm run typecheck` with the flag deleted.
     "ignoreDeprecations": "5.0"
   },
   "include": ["**/*.ts", "**/*.tsx"],

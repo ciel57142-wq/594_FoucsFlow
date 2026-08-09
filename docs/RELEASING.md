@@ -7,7 +7,8 @@ This document describes the release process for the FocusFlow repository.
 Before creating a release, verify all of the following:
 
 - The current `master` branch is up to date and the release commit is on `master`.
-- `FocusFlow/.github/pull_request_template.md` has been used for the PR.
+- `.github/pull_request_template.md` has been used for the PR.
+- A completed record exists in `docs/test-results/` for the version being released, including pass/fail, defect ID, severity, and build SHA per `TESTPLAN.md`.
 - The working tree is clean and all changes are committed.
 - The project is built from the nested `FocusFlow/` directory.
 - `FocusFlow/TESTPLAN.md` sections S1 through S10 have been executed and recorded.

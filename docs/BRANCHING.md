@@ -52,6 +52,12 @@ The Version 2 codebase entered this repository on 4 August 2026 as commit
 `acfa9b1`, an orphan root commit with no parent and no shared ancestry with the
 Version 1 lineage on `main`.
 
-`git merge-base master main` returns empty. The incremental development
-between `v1.0.0` and `v2.0.0` was not captured in version control and cannot be
-reconstructed.
+The incremental development between `v1.0.0` and `v2.0.0` was not captured in
+version control and cannot be reconstructed.
+
+A merge with `--allow-unrelated-histories --strategy=ours` has since joined
+the two lineages so that V1 history is reachable from the trunk and `merge-base`
+resolves. That merge changed no file. It records the relationship that exists;
+it does not recover work that was never committed.
+
+The join commit is `818e8b7`.

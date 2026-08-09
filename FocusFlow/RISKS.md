@@ -16,7 +16,7 @@ to the backlog rather than into an in-flight version.
 Notification delivery and SQLite behaviour differ across Android versions, and exact-alarm
 permissions changed in Android 12+.
 
-- Mitigation: `minSdkVersion` pinned to 26 in `app.json`; a single notification channel is
+- Mitigation: `minSdkVersion` pinned to 26 in `app.config.js`; a single notification channel is
   created explicitly in `services/notifications.ts`; every scheduled reminder is mirrored in
   the `scheduled_notifications` table so the app's view of what is pending never depends on
   the OS.

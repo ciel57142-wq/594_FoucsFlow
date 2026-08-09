@@ -1,0 +1,106 @@
+﻿
+tag v1.0.0
+Tagger: Ciel <ciel57142@gmail.com>
+
+Version 1.0.0 ΓÇö deterministic task manager (reconstructed)
+
+NOTE: this tag marks the nearest surviving V1 artifact on the main lineage.
+It is NOT the ancestor of the shipped V2 code ΓÇö the V2 codebase entered the
+repository as an orphan commit ΓÇö and it predates the CHANGELOG.md [1.0.0]
+description. Applied retrospectively so that a V1 baseline exists at all.
+a9a681c tag: v1.0.0, origin/dev_test 
+docs
+
+---
+tag v2.0.0
+Tagger: Ciel <ciel57142@gmail.com>
+
+Version 2.0.0 ΓÇö predictive scheduling layer
+
+Ranking, completion prediction, adaptive reminders and the Why this? panel,
+per CHANGELOG.md [2.0.0]. Domain suite: 52 tests. Schema: user_version 2.
+bd5e1eb HEAD -> master, tag: v2.0.0, origin/master, origin/HEAD 
+chore(release): merge cm/phase-1-build-integrity into master
+
+---
+M	docs/RELEASING.md
+git : Note: switching to 'v2.0.0'.
+At line:1 char:375
++ ... lePath $out -Encoding utf8 -Append ; git checkout v2.0.0 2>&1 | Out-F ...
++                                          ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Note: switching to 'v2.0.0'.:String) [], RemoteExcept 
+   ion
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at bd5e1eb chore(release): merge cm/phase-1-build-integrity into master
+node.exe : npm warn ERESOLVE overriding peer dependency
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (npm warn ERESOL...peer dependency:String) [], RemoteE 
+   xception
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+npm warn While resolving: react-test-renderer@18.3.1
+npm warn Found: react@19.0.0-rc-6230622a1a-20240610
+npm warn node_modules/jest-expo/node_modules/react
+npm warn   peer react@"19.0.0-rc-6230622a1a-20240610" from react-dom@19.0.0-rc-6230622a1a-20240610
+npm warn   node_modules/jest-expo/node_modules/react-dom
+npm warn     peer react-dom@"19.0.0-rc-6230622a1a-20240610" from 
+react-server-dom-webpack@19.0.0-rc-6230622a1a-20240610
+npm warn     node_modules/jest-expo/node_modules/react-server-dom-webpack
+npm warn   1 more (react-server-dom-webpack)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer react@"^18.3.1" from react-test-renderer@18.3.1
+npm warn node_modules/jest-expo/node_modules/react-test-renderer
+npm warn   react-test-renderer@"18.3.1" from jest-expo@52.0.6
+npm warn   node_modules/jest-expo
+npm warn
+npm warn Conflicting peer dependency: react@18.3.1
+npm warn node_modules/react
+npm warn   peer react@"^18.3.1" from react-test-renderer@18.3.1
+npm warn   node_modules/jest-expo/node_modules/react-test-renderer
+npm warn     react-test-renderer@"18.3.1" from jest-expo@52.0.6
+npm warn     node_modules/jest-expo
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: react-shallow-renderer@16.15.0
+npm warn Found: react@19.0.0-rc-6230622a1a-20240610
+npm warn node_modules/jest-expo/node_modules/react
+npm warn   peer react@"19.0.0-rc-6230622a1a-20240610" from react-dom@19.0.0-rc-6230622a1a-20240610
+npm warn   node_modules/jest-expo/node_modules/react-dom
+npm warn     peer react-dom@"19.0.0-rc-6230622a1a-20240610" from 
+react-server-dom-webpack@19.0.0-rc-6230622a1a-20240610
+npm warn     node_modules/jest-expo/node_modules/react-server-dom-webpack
+npm warn   1 more (react-server-dom-webpack)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer react@"^16.0.0 || ^17.0.0 || ^18.0.0" from react-shallow-renderer@16.15.0
+npm warn 
+node_modules/jest-expo/node_modules/react-test-renderer/node_modules/react-shallow-renderer
+npm warn   react-shallow-renderer@"^16.15.0" from react-test-renderer@18.3.1
+npm warn   node_modules/jest-expo/node_modules/react-test-renderer
+npm warn
+npm warn Conflicting peer dependency: react@18.3.1
+npm warn node_modules/react
+npm warn   peer react@"^16.0.0 || ^17.0.0 || ^18.0.0" from react-shallow-renderer@16.15.0
+npm warn   
+node_modules/jest-expo/node_modules/react-test-renderer/node_modules/react-shallow-renderer
+npm warn     react-shallow-renderer@"^16.15.0" from react-test-renderer@18.3.1
+npm warn     node_modules/jest-expo/node_modules/react-test-renderer
