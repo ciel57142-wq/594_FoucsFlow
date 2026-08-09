@@ -1,0 +1,51 @@
+name: Bug report
+about: Report a bug and include the TESTPLAN case ID.
+title: '[BUG] '
+labels: bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please complete every field below.
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: A short summary of the bug.
+      placeholder: Crashes when saving a task.
+  - type: input
+    id: testplan_id
+    attributes:
+      label: TESTPLAN.md case ID
+      description: Use S1 through S10.
+      placeholder: S1
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - Low
+        - Medium
+        - High
+  - type: input
+    id: device_os
+    attributes:
+      label: Device and OS version
+      placeholder: Android 14 / Pixel 6
+  - type: input
+    id: build_sha
+    attributes:
+      label: Build tag or commit SHA
+      placeholder: abc1234
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior

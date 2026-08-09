@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import type { DimensionValue } from 'react-native';
 import { DayAssessment, STATUS_COPY } from '../domain/planning';
 import { formatMinutes } from '../domain/time';
 import { colors, radius, space, type } from '../theme';
@@ -21,8 +22,8 @@ const STATUS_COLOR = {
 export function CapacityMeter({ assessment, showAdjusted }: { assessment: DayAssessment; showAdjusted: boolean }) {
   const { committedMin, adjustedMin, capacityMin, status } = assessment;
   const scaleMax = Math.max(capacityMin, adjustedMin, committedMin, 60);
-  const pct = (min: number) => `${Math.min(100, (min / scaleMax) * 100)}%`;
-  const capacityLeft = `${Math.min(100, (capacityMin / scaleMax) * 100)}%`;
+  const pct = (min: number): DimensionValue => `${Math.min(100, (min / scaleMax) * 100)}%`;
+  const capacityLeft: DimensionValue = `${Math.min(100, (capacityMin / scaleMax) * 100)}%`;
   const ticks = Math.min(16, Math.round(scaleMax / 30));
 
   return (
@@ -34,7 +35,7 @@ export function CapacityMeter({ assessment, showAdjusted }: { assessment: DayAss
 
       <View style={styles.track}>
         {Array.from({ length: ticks }, (_, i) => (
-          <View key={i} style={[styles.tick, { left: `${((i + 1) / ticks) * 100}%` }]} />
+          <View key={i} style={[styles.tick, { left: `${((i + 1) / ticks) * 100}%` as DimensionValue }]} />
         ))}
         <View style={[styles.fill, { width: pct(committedMin), backgroundColor: STATUS_COLOR[status] }]} />
         <View style={[styles.capacityLine, { left: capacityLeft }]} />

@@ -3,15 +3,19 @@ import { Alert, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, Vi
 import { SafeAreaView } from 'react-native-safe-area-context';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useApp } from '../state/AppContext';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Button, Card, SectionLabel } from '../components/primitives';
 import { Segmented, Stepper, TagPicker } from '../components/controls';
-import { Priority } from '../domain/types';
+import { Priority, Task } from '../domain/types';
+import type { RootStackParamList } from '../navigation';
 import { addDaysToKey, formatClock, formatMinutes } from '../domain/time';
 import { planReminder } from '../domain/reminders';
 import { adjustedEstimate } from '../domain/profile';
 import { colors, radius, space, type } from '../theme';
 
-export function TaskEditScreen({ route, navigation }: { route: any; navigation: any }) {
+type TaskEditScreenProps = NativeStackScreenProps<RootStackParamList, 'TaskEdit'>;
+
+export function TaskEditScreen({ route, navigation }: TaskEditScreenProps) {
   const taskId: string | undefined = route.params?.taskId;
   const { tasks, projects, tags, today, settings, intelligence, createTask, updateTask, deleteTask, completeTask } = useApp();
   const existing = useMemo(() => tasks.find((t) => t.id === taskId), [tasks, taskId]);
@@ -32,7 +36,7 @@ export function TaskEditScreen({ route, navigation }: { route: any; navigation: 
     navigation.setOptions({ title: existing ? 'Edit task' : 'New task' });
   }, [navigation, existing]);
 
-  const previewTask = {
+  const previewTask: Task = {
     ...(existing ?? {
       id: 'preview',
       status: 'open' as const,
@@ -44,6 +48,8 @@ export function TaskEditScreen({ route, navigation }: { route: any; navigation: 
       updatedAt: Date.now(),
       notes: null,
       projectId: null,
+      tags: [],
+      reminderOffsetMin: null,
     }),
     title,
     priority,
@@ -52,7 +58,7 @@ export function TaskEditScreen({ route, navigation }: { route: any; navigation: 
     scheduledFor,
     tags: selectedTags,
     reminderOffsetMin,
-  } as any;
+  };
   const reminder = planReminder(previewTask, settings, intelligence.profile);
   const adjusted = adjustedEstimate(estimateMin, selectedTags, intelligence.profile);
 

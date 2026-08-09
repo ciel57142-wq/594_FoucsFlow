@@ -1,0 +1,48 @@
+name: Risk report
+about: Document a new risk or update an existing one.
+title: '[RISK] '
+labels: risk
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please complete every field below.
+  - type: input
+    id: risk_id
+    attributes:
+      label: Risk ID
+      description: Use the RISKS.md numbering scheme.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+  - type: dropdown
+    id: probability
+    attributes:
+      label: Probability
+      options:
+        - High
+        - Medium
+        - Low
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Impact
+      options:
+        - High
+        - Medium
+        - Low
+  - type: textarea
+    id: mitigation
+    attributes:
+      label: Proposed mitigation
+  - type: input
+    id: owner
+    attributes:
+      label: Owner
+      placeholder: @ciel57142-wq
+  - type: input
+    id: target_date
+    attributes:
+      label: Target review date
+      placeholder: 2026-09-01

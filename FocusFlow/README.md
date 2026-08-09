@@ -91,6 +91,11 @@ dashed second bar in Version 2 showing the same plan at the pace you actually wo
 
 ## Repository conventions
 
-Trunk-based, short-lived branches named `v<version>/<feature>` (e.g. `v2/recommendation-engine`),
-merged to `main` by pull request. `main` is always releasable; each version ends at a tag
-(`v1.0.0`, `v2.0.0`). See `CHANGELOG.md`, `RISKS.md` and `TESTPLAN.md`.
+- `master` is the trunk branch and the default development branch.
+- Changes land through pull requests using `.github/pull_request_template.md`.
+- CI must pass before merging to `master`.
+- CI verifies `npm run lint`, `npm run typecheck`, and the domain test suite.
+- Releases are annotated tags `vMAJOR.MINOR.PATCH` cut from `master` only.
+- `main` holds the Version 1 lineage and is retained read-only.
+
+See `../docs/BRANCHING.md`, `../CHANGELOG.md`, `../RISKS.md`, and `../TESTPLAN.md`.

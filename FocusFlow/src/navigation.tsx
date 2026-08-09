@@ -58,7 +58,7 @@ export function Navigation() {
       <Stack.Navigator
         screenOptions={{
           headerStyle: { backgroundColor: colors.card },
-          headerTitleStyle: { ...type.body, fontWeight: '700' },
+          headerTitleStyle: { fontSize: type.body.fontSize, color: colors.ink, fontWeight: '700' },
           headerTintColor: colors.pine,
           contentStyle: { backgroundColor: colors.paper },
         }}

@@ -1,4 +1,5 @@
 import { getDb, uuid } from '../index';
+import type { SQLiteBindParams } from 'expo-sqlite';
 import { DateKey, Priority, Task } from '../../domain/types';
 import { dateKey, dateKeyToTs, DAY } from '../../domain/time';
 import { logEvent } from './eventRepo';
@@ -136,7 +137,7 @@ export async function updateTask(id: string, patch: Partial<TaskInput>): Promise
   const before = await getTask(id);
   if (!before) return;
 
-  const columns: Record<string, unknown> = {};
+  const columns: Record<string, string | number | null> = {};
   if (patch.title !== undefined) columns.title = patch.title.trim();
   if (patch.notes !== undefined) columns.notes = patch.notes;
   if (patch.projectId !== undefined) columns.project_id = patch.projectId;
@@ -150,7 +151,7 @@ export async function updateTask(id: string, patch: Partial<TaskInput>): Promise
   const assignments = Object.keys(columns)
     .map((c) => `${c} = ?`)
     .join(', ');
-  await db.runAsync(`UPDATE tasks SET ${assignments} WHERE id = ?;`, [...Object.values(columns), id] as any[]);
+  await db.runAsync(`UPDATE tasks SET ${assignments} WHERE id = ?;`, [...Object.values(columns), id] as SQLiteBindParams);
 
   if (patch.tags !== undefined) await setTaskTags(id, patch.tags);
   await logEvent('edited', id, { changed: Object.keys(columns) });
