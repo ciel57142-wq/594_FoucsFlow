@@ -10,7 +10,7 @@
     "test": "jest",
     "test:domain": "jest __tests__",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint . --ext .ts,.tsx"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@react-native-community/datetimepicker": "8.2.0",
