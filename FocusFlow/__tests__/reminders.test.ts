@@ -9,7 +9,7 @@ const NOW = new Date(2026, 4, 26, 9, 0, 0).getTime();
 const v1: Settings = { ...DEFAULT_SETTINGS, appVersion: 1, defaultReminderOffsetMin: 30 };
 const v2: Settings = { ...DEFAULT_SETTINGS, appVersion: 2 };
 
-describe('quiet hours', () => {
+describe('FR-6.1/FR-6.2 quiet hours', () => {
   it('handles a window that wraps past midnight', () => {
     expect(isQuietHour(23, v1)).toBe(true);
     expect(isQuietHour(3, v1)).toBe(true);
@@ -44,6 +44,11 @@ describe('version 1 reminders', () => {
     const dueAt = new Date(2026, 4, 27, 8, 0, 0).getTime(); // 8 AM, offset would land at 2:30 AM
     const plan = fixedReminder(makeTask({ dueAt, reminderOffsetMin: 330 }), v1, NOW)!;
     expect(new Date(plan.fireAt).getHours()).toBe(v1.quietEndHour);
+  });
+
+  it('returns null when a fixed reminder would land after the due date', () => {
+    const dueAt = new Date(2026, 4, 27, 6, 30, 0).getTime();
+    expect(fixedReminder(makeTask({ dueAt, reminderOffsetMin: 480 }), v1, NOW)).toBeNull();
   });
 });
 
@@ -96,6 +101,16 @@ describe('version 2 adaptive reminders', () => {
     const plan = adaptiveReminder(task, v2, emptyProfile(NOW), NOW)!;
     expect(plan.adaptive).toBe(false);
     expect(plan.reason).toMatch(/learning/);
+  });
+
+  it('falls back when adaptive scheduling cannot find any non-quiet candidate time', () => {
+    const { completions, attempts } = generateHistory(STUDENT_PERSONA, 60, NOW);
+    const profile = buildProfile(completions, attempts, NOW);
+    const quietAllDay: Settings = { ...v2, quietStartHour: 0, quietEndHour: 24 };
+    const task = makeTask({ tags: ['school'], dueAt: NOW + 2 * DAY });
+    const plan = adaptiveReminder(task, quietAllDay, profile, NOW);
+    expect(plan).not.toBeNull();
+    expect(plan?.adaptive).toBe(false);
   });
 });
 

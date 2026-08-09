@@ -110,59 +110,61 @@ People often struggle to capture tasks quickly, plan the day around a realistic 
 
 # 3. Software Capabilities
 
+Each capability is assigned a stable requirement ID. Functional requirements are FR-1 through FR-7, with sub-capabilities as FR-1.1, FR-1.2, etc. The schema evolution capability is a nonfunctional requirement.
+
 ## 3.1 Level-1 Capabilities
 
-1. Capture Tasks
-2. Organize Task Work
-3. Plan Today
-4. Complete Tasks
-5. Monitor Progress
-6. Schedule Reminders
-7. Preserve Task Data
+1. FR-1 Capture Tasks
+2. FR-2 Organize Task Work
+3. FR-3 Plan Today
+4. FR-4 Complete Tasks
+5. FR-5 Monitor Progress
+6. FR-6 Schedule Reminders
+7. FR-7 Preserve Task Data
 
 ## 3.2 Level-2 Capabilities
 
-### 1. Capture Tasks
+### FR-1 Capture Tasks
 
-1.1 Create Task
+FR-1.1 Create Task
 
-1.2 Add Task Metadata
+FR-1.2 Add Task Metadata
 
-### 2. Organize Task Work
+### FR-2 Organize Task Work
 
-2.1 Assign Priority
+FR-2.1 Assign Priority
 
-2.2 Link Task to Project or Tags
+FR-2.2 Link Task to Project or Tags
 
-### 3. Plan Today
+### FR-3 Plan Today
 
-3.1 View Due Tasks
+FR-3.1 View Due Tasks
 
-3.2 Reorder Tasks
+FR-3.2 Reorder Tasks
 
-### 4. Complete Tasks
+### FR-4 Complete Tasks
 
-4.1 Mark Task Completed
+FR-4.1 Mark Task Completed
 
-4.2 Record Actual Duration
+FR-4.2 Record Actual Duration
 
-### 5. Monitor Progress
+### FR-5 Monitor Progress
 
-5.1 Review Weekly Statistics
+FR-5.1 Review Weekly Statistics
 
-5.2 Identify Neglected Tags
+FR-5.2 Identify Neglected Tags
 
-### 6. Schedule Reminders
+### FR-6 Schedule Reminders
 
-6.1 Create Reminder Rule
+FR-6.1 Create Reminder Rule
 
-6.2 Cancel Reminder
+FR-6.2 Cancel Reminder
 
-### 7. Preserve Task Data
+### FR-7 Preserve Task Data
 
-7.1 Persist Data Locally
+FR-7.1 Persist Data Locally
 
-7.2 Support Schema Evolution
+NFR-1 Support Schema Evolution
 
 ---
 

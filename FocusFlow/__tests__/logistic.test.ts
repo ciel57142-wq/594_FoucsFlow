@@ -26,7 +26,7 @@ function fit(days: number) {
 
 const flatSignals: Signals = { due: 0.5, timeOfDay: 0.5, priority: 0.5, deferral: 0, effort: 1 };
 
-describe('completion-likelihood model', () => {
+describe('FR-5.1/FR-7/NFR-1 completion-likelihood model', () => {
   it('beats always-guessing-the-majority-class on a seeded 90-day history', () => {
     const { model, samples } = fit(90);
     const majority = Math.max(

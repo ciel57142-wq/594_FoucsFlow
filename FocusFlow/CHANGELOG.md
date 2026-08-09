@@ -3,6 +3,19 @@
 User-visible changes, newest first. Format follows Keep a Changelog; versions match the
 project's two planned releases.
 
+## [2.1.0] — CI, testing, and traceability hardening
+
+### Added
+- A hardened CI pipeline with commitlint range support for both push and pull_request events,
+  npm audit checks, concurrency control, and coverage artifact publishing.
+- Dependabot configuration for automated npm dependency updates.
+- Traceability documentation, stable requirement IDs, and test coverage for schema migration,
+  signals, and time utilities.
+- Root `.gitignore` cleanup to remove committed log artifacts and keep the repository clean.
+
+### Changed
+- Updated repo release metadata and release-ready version bump to 2.1.0.
+
 ## [2.0.0] — Predictive scheduling layer
 
 ### Added

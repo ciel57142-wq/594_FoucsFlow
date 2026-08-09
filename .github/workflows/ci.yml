@@ -1,5 +1,9 @@
 name: CI
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   pull_request:
     branches: [master]
@@ -22,7 +26,17 @@ jobs:
           node-version: 20
       - name: Commitlint
         working-directory: .
-        run: npx commitlint --from=${{ github.event.pull_request.base.sha }} --to=${{ github.sha }}
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            from=${{ github.event.pull_request.base.sha }}
+          else
+            from=${{ github.event.before }}
+          fi
+          if [ -z "$from" ] || [ "$from" = "0000000000000000000000000000000000000000" ]; then
+            from=$(git rev-parse HEAD~3)
+          fi
+          echo "Commitlint range: $from..${{ github.sha }}"
+          npx commitlint --from="$from" --to="${{ github.sha }}"
 
   verify:
     runs-on: ubuntu-latest
@@ -33,9 +47,16 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      - name: Audit dependencies
+        run: npm audit --audit-level=high
       - name: Lint
         run: npm run lint
       - name: Typecheck
         run: npm run typecheck
-      - name: Domain unit tests
-        run: npx jest -c jest.domain.config.js --ci
+      - name: Domain coverage tests
+        run: npx jest -c jest.domain.config.js --coverage --ci
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: domain-coverage-report
+          path: FocusFlow/coverage

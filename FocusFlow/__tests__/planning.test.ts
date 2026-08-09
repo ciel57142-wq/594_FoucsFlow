@@ -8,7 +8,7 @@ import { makeTask } from './factories';
 
 const NOW = new Date(2026, 4, 26, 9, 0, 0).getTime();
 
-describe('overcommitment warning', () => {
+describe('FR-3.1/FR-3.2/FR-5.1 overcommitment warning', () => {
   it('calls a light day light', () => {
     const tasks = [makeTask({ estimateMin: 30 }), makeTask({ estimateMin: 25 })];
     const day = assessDay(tasks, emptyProfile(NOW), 240, null);
@@ -59,5 +59,12 @@ describe('overcommitment warning', () => {
     const day = assessDay([], emptyProfile(NOW), 240, null);
     expect(day.taskCount).toBe(0);
     expect(day.message).toMatch(/Nothing planned/);
+  });
+
+  it('calls a tight day tight when the plan is nearly full', () => {
+    const tasks = Array.from({ length: 8 }, () => makeTask({ estimateMin: 30 }));
+    const day = assessDay(tasks, emptyProfile(NOW), 240, null);
+    expect(day.status).toBe('tight');
+    expect(day.message).toMatch(/Not much room for anything unexpected/);
   });
 });

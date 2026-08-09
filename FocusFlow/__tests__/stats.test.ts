@@ -16,7 +16,7 @@ const record = (daysAgo: number, hour: number, estimate = 30, actual = 30): Comp
   dueAt: null,
 });
 
-describe('weekly statistics', () => {
+describe('FR-5.1 weekly statistics', () => {
   it('counts only the last seven days', () => {
     const { completions, attempts } = generateHistory(STUDENT_PERSONA, 40, NOW);
     const stats = weeklyStats(completions, attempts, NOW);

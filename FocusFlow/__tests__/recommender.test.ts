@@ -11,7 +11,7 @@ function ctx(profile = emptyProfile(NOW), remainingMin = 480) {
   return { now: NOW, profile, weights: DEFAULT_WEIGHTS, remainingMin, capacityMin: 240, model: null };
 }
 
-describe('next-task recommendation', () => {
+describe('FR-3.1/FR-3.2/FR-4/FR-5.2 next-task recommendation', () => {
   it('puts an overdue high-priority task above a distant low-priority one', () => {
     const overdue = makeTask({ id: 'overdue', priority: 3, dueAt: NOW - 2 * HOUR });
     const later = makeTask({ id: 'later', priority: 0, dueAt: NOW + 6 * DAY });
